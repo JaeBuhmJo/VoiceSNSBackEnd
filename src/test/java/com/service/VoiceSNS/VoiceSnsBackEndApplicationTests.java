@@ -36,10 +36,10 @@ class VoiceSnsBackEndApplicationTests {
 		System.out.println(user);
 		System.out.println(session.insert("UserMapper.insertUser", user));
 		session.commit();
-		System.out.println(user);
 		
 		// 다음 항목들 테스트를 위해 Id를 insertUser의 userId로 세팅
 		user = session.selectOne("UserMapper.getUserInfo", user);
+		System.out.println(user);
 		userId = user.getUserId();
 	}
 	
@@ -95,7 +95,7 @@ class VoiceSnsBackEndApplicationTests {
 		Reader r = Resources.getResourceAsReader("config/SqlMapConfig.xml");
 		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(r);
 		SqlSession session = factory.openSession();
-		System.out.println(session.delete("UserMapper.deleteUser", userId-1));
+		System.out.println(session.delete("UserMapper.deleteUser", userId));
 		session.commit();
 	}
 	

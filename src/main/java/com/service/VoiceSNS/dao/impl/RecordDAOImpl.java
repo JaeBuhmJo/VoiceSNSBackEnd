@@ -15,23 +15,28 @@ public class RecordDAOImpl implements RecordDAO{
 	private final String NS = "RecordMapper.";
 	@Autowired
 	private SqlSession sqlSession;
-
-	@Override
-	public Record getRecord(int recordId, int userId) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("recordId", recordId);
-		params.put("userId", userId);
-		return sqlSession.selectOne(NS + "getRecord", params);
-	}
-
+	
 	@Override
 	public int insertRecord(Record record) {
 		return sqlSession.insert(NS + "insertRecord", record);
 	}
-
+	
 	@Override
 	public int insertIntoPost(Record record) {
 		return sqlSession.insert(NS + "insertIntoPost", record);
+	}
+	
+	@Override
+	public Record getRecord(int recordId) {
+		return sqlSession.selectOne(NS + "getRecord", recordId);
+	}
+	
+	@Override
+	public Record getUserRecord(int recordId, int userId) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("recordId", recordId);
+		params.put("userId", userId);
+		return sqlSession.selectOne(NS + "getUserRecord", params);
 	}
 
 	@Override

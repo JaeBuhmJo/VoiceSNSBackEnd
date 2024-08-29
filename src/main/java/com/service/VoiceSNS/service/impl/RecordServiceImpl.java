@@ -12,11 +12,6 @@ public class RecordServiceImpl implements RecordService{
 	private RecordDAO recordDAO;
 
 	@Override
-	public Record getRecord(int recordId, int userId) {
-		return recordDAO.getRecord(recordId, userId);
-	}
-
-	@Override
 	public int registerRecord(Record record) {
 		return recordDAO.insertRecord(record);
 	}
@@ -24,6 +19,16 @@ public class RecordServiceImpl implements RecordService{
 	@Override
 	public int registertIntoPost(Record record) {
 		return recordDAO.insertIntoPost(record);
+	}
+	
+	@Override
+	public Record getRecord(int recordId) {
+		return recordDAO.getRecord(recordId);
+	}
+	
+	@Override
+	public Record getUserRecord(int recordId, int userId) {
+		return recordDAO.getUserRecord(recordId, userId);
 	}
 
 	@Override
@@ -35,5 +40,6 @@ public class RecordServiceImpl implements RecordService{
 	public int deleteAllRecords() {
 		return recordDAO.deleteAllRecords();
 	}
+
 
 }
