@@ -36,6 +36,8 @@ class VoiceSnsBackEndApplicationTests {
 		System.out.println(user);
 		System.out.println(session.insert("UserMapper.insertUser", user));
 		session.commit();
+		System.out.println(user);
+		
 		// 다음 항목들 테스트를 위해 Id를 insertUser의 userId로 세팅
 		user = session.selectOne("UserMapper.getUserInfo", user);
 		userId = user.getUserId();
@@ -58,6 +60,7 @@ class VoiceSnsBackEndApplicationTests {
 		System.out.print(session.update("UserMapper.updateUserGoogle", user));
 		System.out.println(session.update("UserMapper.updateUserKakao", user));
 		session.commit();
+		System.out.println(user);
 	}
 	
 	@Test

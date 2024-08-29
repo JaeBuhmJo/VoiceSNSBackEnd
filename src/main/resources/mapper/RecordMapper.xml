@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+ * 작성자 : 정해슬 
+ * 설명 : RecordMapper 생성 
+ * 
+ * 수정자       수정일         수정 내용
+ * 
+ * 정해슬     8:28 20:00     RecordMapper에서 녹음 포스팅 
+ -->
+
+<mapper namespace="RecordMapper">
+
+	<!-- 특정 User의 특정 녹음 선택 -->
+	<select id="getRecord" parameterType="User" resultType="Record">
+		SELECT record_id, r_date, content, user_id
+		FROM record
+		WHERE record_id = #{recordId} AND user_id = #{userId}
+	</select>
+
+	<insert id="insertRecord" parameterType="Record">
+		INSERT INTO record (
+			r_date, 
+			content, 
+			user_id
+		)
+		VALUES (
+			#{rDate},
+			#{content},
+			#{userId}
+		)	
+	</insert>
+	
+	<!-- 선택한 녹음을 post 테이블로 이동 -->
+	<insert id="insertIntoPost" parameterType="Record">
+	    INSERT INTO post (record_id, r_date, content, user_id)
+	    SELECT record_id, r_date, content, user_id
+	    FROM record
+	    WHERE record_id = #{recordId}
+	      AND user_id = #{userId}
+	      AND DATE(r_date) = CURDATE()
+	</insert>
+
+	<!-- 특정 유저의 포스팅 안 된 오늘 녹음 삭제 -->
+	<delete id="deleteUnselectedRecords" parameterType="User">
+	    DELETE FROM record
+	    WHERE user_id = #{userId}
+	      AND DATE(r_date) = CURDATE()
+	</delete>
+	
+	<!-- 새벽 4시에 모든 유저의 녹음 삭제 -->
+	<delete id="deleteAllRecords">
+        DELETE FROM record;
+    </delete>
+
+
+</mapper>
