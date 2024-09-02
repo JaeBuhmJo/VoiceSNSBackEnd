@@ -6,7 +6,8 @@ public interface UserService {
 	int registerUser(User user);
 	int deleteUser(int userId);
 	User findUser(int userId);
-	User getUserInfo(User user);
+	User getUserSelfInfo(String email);
+	boolean checkUserCredentials(User user);
 	int updateUserPassword(User user);
 	int updateUserNickname(User user);
 	int updateUserProfilePicture(User user);

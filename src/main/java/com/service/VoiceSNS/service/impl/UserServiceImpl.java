@@ -15,6 +15,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int registerUser(User user) {
+		System.out.println("registerUser " + user);
 		return userDAO.insertUser(user);
 	}
 
@@ -29,10 +30,15 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User getUserInfo(User user) {
-		return userDAO.getUserInfo(user);
+	public User getUserSelfInfo(String email) {
+		return userDAO.getUserSelfInfo(email);
 	}
-
+	
+	@Override
+	public boolean checkUserCredentials(User user) {
+		return userDAO.checkUserCredentials(user)==1;
+	}
+	
 	@Override
 	public int updateUserPassword(User user) {
 		return userDAO.updateUserPassword(user);

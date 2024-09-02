@@ -36,6 +36,15 @@ public class User {
 		this.kakao = kakao;
 	}
 	
+	// login용 생성자
+	public User(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
+	}
+	
+	
+	
 	
 	
 	

@@ -28,9 +28,4 @@
 		</environment>
 	</environments>
 
-	<!-- mapper 명시 -->
-	<mappers>
-		<mapper resource="mapper/UserMapper.xml"/>
-		<mapper resource="mapper/RecordMapper.xml"/>
-	</mappers>
 </configuration>
