@@ -16,6 +16,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public int insertUser(User user) {
+		System.out.println("userDAO " + user);
 		return sqlSession.insert(NS+"insertUser", user);
 	}
 
@@ -30,8 +31,13 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
-	public User getUserInfo(User user) {
-		return sqlSession.selectOne(NS+"getUserInfo", user);
+	public User getUserSelfInfo(String email) {
+		return sqlSession.selectOne(NS+"getUserSelfInfo", email);
+	}
+	
+	@Override
+	public int checkUserCredentials(User user) {
+		return sqlSession.selectOne(NS+"checkUserCredentials", user);
 	}
 	
 	@Override
