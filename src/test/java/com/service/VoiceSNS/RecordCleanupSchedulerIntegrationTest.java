@@ -48,8 +48,8 @@ public class RecordCleanupSchedulerIntegrationTest {
 		byte[] content = new byte[] {1, 2, 3};
 		
 		Record record = new Record(currentTime, content, userId);
-		System.out.println(record);
 		System.out.println(session.insert("RecordMapper.insertRecord", record));
+		System.out.println(record);
 		session.commit();
     }
     

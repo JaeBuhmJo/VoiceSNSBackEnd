@@ -1,15 +1,18 @@
 package com.service.VoiceSNS.dao.impl;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Repository;
 
 import com.service.VoiceSNS.dao.RecordDAO;
 import com.service.VoiceSNS.domain.Record;
 
+@Repository
 public class RecordDAOImpl implements RecordDAO{
 
 	private final String NS = "RecordMapper.";
@@ -17,8 +20,14 @@ public class RecordDAOImpl implements RecordDAO{
 	private SqlSession sqlSession;
 	
 	@Override
-	public int insertRecord(Record record) {
-		return sqlSession.insert(NS + "insertRecord", record);
+	public Record insertRecord(Record record) {
+		int rowsAffected = sqlSession.insert(NS + "insertRecord", record);
+        if (rowsAffected > 0) {
+            // 삽입이 성공하면 record 객체를 반환
+            return record;
+        } else {
+            throw new RuntimeException("Failed to insert record");
+        }
 	}
 	
 	@Override
@@ -32,11 +41,8 @@ public class RecordDAOImpl implements RecordDAO{
 	}
 	
 	@Override
-	public Record getUserRecord(int recordId, int userId) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("recordId", recordId);
-		params.put("userId", userId);
-		return sqlSession.selectOne(NS + "getUserRecord", params);
+	public List<Record> getUserRecords(int userId) {
+		return sqlSession.selectOne(NS + "getUserRecords", userId);
 	}
 
 	@Override
