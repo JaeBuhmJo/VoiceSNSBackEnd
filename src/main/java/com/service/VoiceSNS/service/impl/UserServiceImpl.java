@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public boolean checkUserCredentials(User user) {
-		return userDAO.checkUserCredentials(user)==1;
+		return userDAO.checkUserCredentials(user);
 	}
 	
 	@Override

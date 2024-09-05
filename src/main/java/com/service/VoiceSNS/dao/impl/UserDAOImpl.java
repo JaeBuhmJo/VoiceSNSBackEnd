@@ -36,8 +36,8 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
-	public int checkUserCredentials(User user) {
-		return sqlSession.selectOne(NS+"checkUserCredentials", user);
+	public Boolean checkUserCredentials(User user) {
+		return sqlSession.selectOne(NS+"checkUserCredentials", user)!=null;
 	}
 	
 	@Override
