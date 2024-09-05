@@ -2,7 +2,6 @@ package com.service.VoiceSNS.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -16,20 +15,19 @@ import com.service.VoiceSNS.filter.JwtRequestFilter;
 public class SecurityConfig {
 	
     @Bean
-    public JwtRequestFilter jwtRequestFilter() {
+    JwtRequestFilter jwtRequestFilter() {
         return new JwtRequestFilter();
     }
 
 	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	    http.csrf(csrf -> csrf.disable())
 	        .authorizeHttpRequests(auth -> auth
-	            .requestMatchers(HttpMethod.POST, "/user").permitAll()
-	            .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+	            .requestMatchers("/**").permitAll() // security 권한 레벨은 활용하지 않으므로 모두 허용
 	            .anyRequest().authenticated())
 	        .sessionManagement(session -> session
 	            .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-	        .addFilterBefore(jwtRequestFilter(), UsernamePasswordAuthenticationFilter.class);
+	        .addFilterBefore(jwtRequestFilter(), UsernamePasswordAuthenticationFilter.class); // 모든 요청은 jwtRequestFilter를 거친다
 
 	    return http.build();
 	}

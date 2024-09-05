@@ -45,6 +45,7 @@ public class JwtUtil {
     }
 
     public boolean validateToken(String token) {
+    	// 유효기간 이내이며 해당 토큰에서 추출한 Username이 DB에 존재할 경우 유효한 토큰으로 간주 
         return (userService.getUserSelfInfo(extractUsername(token))!=null && !isTokenExpired(token));
     }
 

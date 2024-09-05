@@ -7,7 +7,7 @@ public interface UserDAO {
 	int deleteUser(int userId);
 	User findUser(int userId);
 	User getUserSelfInfo(String email);
-	int checkUserCredentials(User user);
+	Boolean checkUserCredentials(User user);
 	// user update는 각각의 버튼을 통해서 이뤄지므로 db 접근을 구분한다
 	int updateUserPassword(User user);
 	int updateUserNickname(User user);
