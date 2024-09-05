@@ -27,6 +27,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         final String refreshToken = request.getHeader("Refresh-Token");
         String path = request.getRequestURI();
 
+        // 임시 우회 경로
+        if (path.startsWith("/record")) {
+            chain.doFilter(request, response);
+            return;
+        }
+        
         // 회원가입과 로그인 요청은 필터를 통과
         if ("/user".equals(path) || "/auth/login".equals(path)) {
             chain.doFilter(request, response);

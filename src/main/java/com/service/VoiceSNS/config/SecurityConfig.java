@@ -26,6 +26,7 @@ public class SecurityConfig {
 	        .authorizeHttpRequests(auth -> auth
 	            .requestMatchers(HttpMethod.POST, "/user").permitAll()
 	            .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+	            .requestMatchers("/record/**").permitAll()
 	            .anyRequest().authenticated())
 	        .sessionManagement(session -> session
 	            .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

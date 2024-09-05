@@ -2,6 +2,8 @@ package com.service.VoiceSNS.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,11 +20,19 @@ import com.service.VoiceSNS.domain.Record;
 @RequestMapping("/record")
 public class RecordController {
 
+	private static final Logger logger = LoggerFactory.getLogger(RecordController.class);
+
 	@Autowired
 	private RecordService recordService;
 	
 	@PostMapping("/register")
 	public Record createRecord(@RequestBody Record record) {
+		// 로그 추가
+        logger.info("createRecord 호출됨");
+        logger.info("받은 Record: {}", record);
+        logger.info("Content: {}", record.getContent());
+        logger.info("Content 타입: {}", record.getContent().getClass().getName());
+        
         return recordService.registerRecord(record);
     }
 	
