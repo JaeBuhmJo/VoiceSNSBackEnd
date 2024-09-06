@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ConnectMapper">
+
+	<insert id="insertConnect" parameterType="map">
+		INSERT INTO Connection (user1_id, user2_id,c_date)
+        VALUES (#{user_id_one}, #{user_id_two},NOW())
+	</insert>
+	
+
+	<select id="getConnect" parameterType="map" resultType="map">
+        SELECT *
+        FROM Connection 
+        WHERE (user1_id = #{user_id_one} AND user2_id = #{user_id_two}) or (user1_id = #{user_id_two} AND user2_id = #{user_id_one}) 
+	</select>
+
+	
+	<select id="getConnects" resultType="map">
+        SELECT * 
+        FROM Connection 
+        WHERE  user1_id = #{user_id_one}
+	</select>
+	
+	<update id="deleteConnect"  parameterType="map">
+		DELETE FROM Connection
+		WHERE user1_id = #{user_id_one} AND user2_id = #{user_id_two}
+	</update>
+	
+	
+</mapper>
