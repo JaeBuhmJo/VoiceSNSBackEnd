@@ -46,8 +46,8 @@ public class AuthController {
     // refresh 토큰 기반으로 신규 jwt 발급 요청
     @PostMapping("/refresh")
     public ResponseEntity<Message> refreshToken(HttpServletRequest request, HttpServletResponse response) {
-    	String refreshToken = request.getHeader("Refresh-Token");
-    	System.out.println("AuthController : jwt refresh requested");
+    	String refreshToken = request.getHeader("Refresh-Token").substring(13);
+    	System.out.println("AuthController : jwt refresh requested : "  + refreshToken);
         if (jwtUtil.validateToken(refreshToken)) {
             String username = jwtUtil.extractUsername(refreshToken);
             String newJwt = jwtUtil.generateToken(username);
